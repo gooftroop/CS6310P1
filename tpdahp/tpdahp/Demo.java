@@ -2,6 +2,7 @@ package tpdahp;
 
 import java.util.Hashtable;
 
+import lib.DemoHandler;
 import lib.ISimulation;
 
 public class Demo {
@@ -19,7 +20,7 @@ public class Demo {
 		float top = Float.parseFloat(options.get("-t"));
 		float bottom = Float.parseFloat(options.get("-b"));
 		
-		ISimulation simulation = new Tpdahp(new TpdahpHandler(width, height));	
+		ISimulation simulation = new Tpdahp(new DemoHandler(width, height));	
 		simulation.setup(width, height, left, right,top, bottom);
 		
 		System.out.format("Starting %d x %d plate simulation...\n", width, height);

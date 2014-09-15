@@ -1,13 +1,11 @@
-package twfahp;
+package lib;
 
-import lib.ResultsHandler;
-
-public class TwfahpHandler extends ResultsHandler {
+public class DemoHandler extends ResultsHandler {
 	
 	private String resultMatrix;
 	private final int width;
 	
-	public TwfahpHandler(int width, int height) {
+	public DemoHandler(int width, int height) {
 		super();
 		
 		if (width < 0 || width > Integer.MAX_VALUE) throw new IllegalArgumentException("Invalid width");
