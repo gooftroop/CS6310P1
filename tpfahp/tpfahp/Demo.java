@@ -21,6 +21,8 @@ public class Demo {
 		
 		ISimulation simulation = new Tpfahp(new TpfahpHandler(width, height));
 		simulation.setup(width, height, left, right,top, bottom);
+		
+		System.out.format("Starting %d x %d plate simulation...\n", width, height);
 		simulation.run();
 	}
 
@@ -41,7 +43,6 @@ public class Demo {
 		for (int i = 0; i < args.length; i++) {
 			
 			curr = args[i];
-			
 	        switch (curr.charAt(0)) {
 	        
 	        	case '-':
@@ -59,27 +60,3 @@ public class Demo {
 		}	
 	}
 }
-
-//private void print ( Float matrix[][] ) {
-//
-//String outputString = "";
-//
-//System.out.println("Iteration "+numIterations+":");
-//
-//for ( int i = 0 ; i < matrixDimension ; i++ ) {
-//	
-//	for ( int j = 0 ; j < matrixDimension ; j++ ) {
-//		
-//		// skip the edge rows
-//		if ( i != 0 && i != ( matrixDimension - 1 ) && j != 0 && j != ( matrixDimension - 1 ) ) {
-//			
-//			outputString = String.format("%5.2f", matrix[i][j]);
-//			System.out.print(outputString);					
-//			System.out.print(" ");
-//		}
-//	}
-//	
-//	// new line for next row
-//	System.out.println();
-//}
-//}
