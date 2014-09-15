@@ -59,8 +59,6 @@ public final class Twfahp extends Simulation {
 	@Override
 	public void run() {
 		
-		// TODO add update call
-		
 		float maxDeviation = 0.0f;
 		
 		do {
@@ -76,6 +74,8 @@ public final class Twfahp extends Simulation {
 					if ( newMatrix[i][j] - oldMatrix[i][j] > maxDeviation ) {
 						maxDeviation = newMatrix[i][j] - oldMatrix[i][j];
 					}
+					
+					this.update(newMatrix[i][j], i, j);
 				}
 			}
 
