@@ -12,8 +12,6 @@ public class Demo {
 		Demo.configureOpts();
 		Demo.parseArgs(args);
 		
-		ISimulation simulation = new Tpfahp(new TpfahpHandler());
-		
 		int width = Integer.parseInt(options.get("-d"));
 		int height = Integer.parseInt(options.get("-d"));
 		float left = Float.parseFloat(options.get("-l"));
@@ -21,6 +19,7 @@ public class Demo {
 		float top = Float.parseFloat(options.get("-t"));
 		float bottom = Float.parseFloat(options.get("-b"));
 		
+		ISimulation simulation = new Tpfahp(new TpfahpHandler(width, height));
 		simulation.setup(width, height, left, right,top, bottom);
 		simulation.run();
 	}
@@ -35,23 +34,26 @@ public class Demo {
 	
 	private static void parseArgs(String... args) {
 		
-		String currOpt = "";
+		String curr = "", currOpt = "";
+		
+		if (args.length == 0) throw new IllegalArgumentException("No arguments provided to Demo");
 		
 		for (int i = 0; i < args.length; i++) {
 			
-	        switch (args[i].charAt(0)) {
+			curr = args[i];
+			
+	        switch (curr.charAt(0)) {
 	        
-		        case '-':
-		            if (args[i].length() < 2) throw new IllegalArgumentException("Not a valid argument: " + args[i]);
-		            if (args[i].charAt(1) == '-') throw new IllegalArgumentException("Not a valid argument: " + args[i]);
-		            else {
-		                if (args.length - 1 == (i + 1))  throw new IllegalArgumentException("Expected arg after: " + args[i]);
-		                if (!options.contains(args[i])) throw new IllegalArgumentException("Invalid argument: " + args[i]);
-		                currOpt = args[i];
-		            }
+	        	case '-':
+		            if (!"".equals(currOpt)) throw new IllegalArgumentException("No value for argument '" + currOpt + "'");
+		            if (args.length == (i + 1))  throw new IllegalArgumentException("Expected value after argument '" + curr + "'");
+		            if (!options.containsKey(curr)) throw new IllegalArgumentException("Invalid argument '" + curr + "'");
+		            currOpt = curr;
 		            break;
 		        default:
-		            options.put(currOpt, args[i]);
+		        	if ("".equals(currOpt)) throw new IllegalArgumentException("Expected argument for value '" + curr + "'");
+		            options.put(currOpt, curr);
+		            currOpt = "";
 		            break;
 	        }
 		}	

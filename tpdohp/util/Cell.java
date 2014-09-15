@@ -24,9 +24,11 @@ public interface Cell<T> {
 	
 	public void setTemp(double temp);
 	
-	public float calculateTemp();
+	public double calculateTemp();
 	
 	public void swapTemp();
+	
+	public void visited(boolean visited);
 	
 	public Iterator<T> getChildren(boolean unvisited);
 	

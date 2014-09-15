@@ -50,18 +50,17 @@ public final class Tpdohp extends Simulation {
 		this.rightTemp 	= (double) rightTemp;
 		this.topTemp 	= (double) topTemp;
 		this.bottomTemp = (double) bottomTemp;
+		
+		this.initializePlate();
 	}
 
 	@Override
 	public void initializePlate() {
 		
-		LatticePoint latticeRoot = new LatticePoint(0, true);
-		LatticePoint curr = latticeRoot, left = null, top = null;
-		LatticePoint anchor = curr;
+		LatticePoint left = null, curr = null, right = null, top = null;
 		
 		double temp = 0;
 		boolean edge = true;
-		String debug = "";
 		
 		for (int h = 0; h < this.height; h++) {
 			for (int w = 0; w < this.width; w++) {
@@ -74,22 +73,39 @@ public final class Tpdohp extends Simulation {
 				else if (w == this.width - 1) temp = this.rightTemp;
 				else temp = 0;
 				
-				curr.setRight(new LatticePoint(null, null, null, null, temp, edge));
-				curr.setTop(top);
-				curr.setLeft(left);
-				
-				debug = String.format("%5.2f ", curr.currTemp);
-				System.out.print(debug);
+				curr = new LatticePoint(top, null, left, null, temp, edge, w - 1, h - 1);
+				if (top != null) top.setBottom(curr);
+				if (left != null) left.setRight(curr);
 				
 				left = curr;
 				if (top != null) top = top.right;
 			}
-			top = anchor;
-			anchor = anchor.bottom;
-			System.out.println();
+			
+			top = curr;
+			if (++h >= this.height) break;
+			
+			for (int w = this.width - 1; w >= 0; w--) {
+				
+				edge = (w == 0 || h == 0 || w == this.width - 1 || h == this.height - 1) ? true : false;
+				
+				if (h == 0) temp = this.topTemp;
+				else if (w == 0) temp = this.leftTemp;
+				else if (h == this.height - 1) temp = this.bottomTemp;
+				else if (w == this.width - 1) temp = this.rightTemp;
+				else temp = 0;
+				
+				curr = new LatticePoint(top, null, null, right, temp, edge, w - 1, h - 1);
+				if (top != null) top.setBottom(curr);
+				if (right != null) right.setLeft(curr);
+				
+				if (curr.x == 0 && curr.y == 0) this.root = curr;
+				
+				right = curr;
+				if (top != null) top = top.left;
+			}
+			
+			top = curr;
 		}
-		
-		this.root = latticeRoot.getBottom().getRight();
 	}
 	
 	@Override
@@ -97,15 +113,16 @@ public final class Tpdohp extends Simulation {
 		
 		Queue<LatticePoint> bfs = new LinkedList<LatticePoint>();
 		
-		// TODO add update call
-		
-		float maxDeviation = 0;
-		float deviation = 0;
+		int currIterations = 0;
+		double maxDeviation = 0;
+		double deviation = 0;
 		
 		do {
 			
+			maxDeviation = 0;
+			
 			bfs.add(this.root);
-			this.root.visited = true;
+			this.root.visited(true);
 			
 			if ((deviation = this.root.calculateTemp()) > maxDeviation) maxDeviation = deviation;
 			
@@ -116,20 +133,23 @@ public final class Tpdohp extends Simulation {
 				Iterator<LatticePoint> itr = point.getChildren(false);
 				while(itr.hasNext()) {
 					child = itr.next();
-					child.visited = true;
+					child.visited(true);
 					
 					if ((deviation = child.calculateTemp()) > maxDeviation) maxDeviation = deviation;
-					
 					bfs.add(child);
 				}
 				
-				point.swapTemp();
+				this.update((float)point.getTemp(), point.x, point.y);
 			}
-		
-			this.root.swapTemp();
+
 			clearNodes();
+			rh.setNumIterations(currIterations);
 		
-		} while (maxDeviation >= 0.01 && numIterations++ <= MAX_ITERATIONS);
+		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
+		
+		rh.stop();
+		rh.setNumIterations(currIterations);
+		rh.report();
 	}
 	
 	private void clearNodes() {
@@ -138,6 +158,8 @@ public final class Tpdohp extends Simulation {
 		
 		bfs.add(this.root);
 		this.root.visited = false;
+		this.root.swapTemp();
+		
 		while(!bfs.isEmpty()) {
 			LatticePoint point = bfs.remove();
 			LatticePoint child = null;
@@ -146,6 +168,7 @@ public final class Tpdohp extends Simulation {
 			while(itr.hasNext()) {
 				child = itr.next();
 				child.visited = false;
+				child.swapTemp();
 				bfs.add(child);
 			}
 		}
@@ -155,23 +178,32 @@ public final class Tpdohp extends Simulation {
 		
 		public static final double AVG = 4.0;
 		
-		private LatticePoint top = null;
-		private LatticePoint bottom = null;
-		private LatticePoint left = null;
-		private LatticePoint right = null;
-		private boolean visited, isEdge;
+		public final int x, y;
+		
+		private boolean visited;
 		private double currTemp, newTemp;
 		
-		public LatticePoint(double temp, boolean isEdge) {
+		private final boolean isEdge;
+		
+		private LatticePoint top = null, bottom = null, left = null, right = null;
+		
+		public LatticePoint(double temp, boolean isEdge, int x, int y) {
+			
+			if (temp > Double.MAX_VALUE) throw new IllegalArgumentException("Invalid temp provided");
+			if (x > Integer.MAX_VALUE || x < Integer.MIN_VALUE) throw new IllegalArgumentException("Invalid 'x' provided");
+			if (y > Integer.MAX_VALUE || y < Integer.MIN_VALUE) throw new IllegalArgumentException("Invalid 'y' provided");
+			
+			this.x = x;
+			this.y = y;
 			
 			this.setTemp(temp);
 			this.visited = false;
 			this.isEdge = isEdge;
 		}
 		
-		public LatticePoint(LatticePoint top, LatticePoint bottom, LatticePoint left, LatticePoint right, double temp, boolean isEdge) {
+		public LatticePoint(LatticePoint top, LatticePoint bottom, LatticePoint left, LatticePoint right, double temp, boolean isEdge, int x, int y) {
 			
-			this(temp, isEdge);
+			this(temp, isEdge, x, y);
 			
 			this.setTop(top);
 			this.setBottom(bottom);
@@ -183,9 +215,7 @@ public final class Tpdohp extends Simulation {
 		public void setTop(LatticePoint top) {
 			
 			if (top == null) return;
-			
 			this.top = top;
-			top.bottom = this;
 		}
 		
 		@Override
@@ -197,9 +227,7 @@ public final class Tpdohp extends Simulation {
 		public void setBottom(LatticePoint bottom) {
 			
 			if (bottom == null) return;
-			
 			this.bottom = bottom;
-			bottom.top = this;
 		}
 		
 		@Override
@@ -211,9 +239,7 @@ public final class Tpdohp extends Simulation {
 		public void setRight(LatticePoint right) {
 			
 			if (right == null) return;
-			
 			this.right = right;
-			right.left = this;
 		}
 		
 		@Override
@@ -225,9 +251,7 @@ public final class Tpdohp extends Simulation {
 		public void setLeft(LatticePoint left) {
 			
 			if (left == null) return;
-			
 			this.left = left;
-			left.setRight(this);
 		}
 		
 		@Override
@@ -246,14 +270,20 @@ public final class Tpdohp extends Simulation {
 		}
 		
 		@Override
-		public float calculateTemp() {
-			this.newTemp = (this.top.currTemp + this.bottom.currTemp + this.right.currTemp + this.left.currTemp) / AVG;
-			return (float)this.newTemp - (float)this.currTemp;
+		public double calculateTemp() {
+			this.newTemp = (this.top.getTemp() + this.bottom.getTemp() + this.right.getTemp() + this.left.getTemp()) / AVG;
+			return this.newTemp - this.currTemp;
 		}
 		
 		@Override
 		public void swapTemp() {
 			this.currTemp = this.newTemp;
+			this.newTemp = 0;
+		}
+		
+		@Override
+		public void visited(boolean visited) {
+			this.visited = visited;
 		}
 		
 		@Override
