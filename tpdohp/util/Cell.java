@@ -1,17 +1,33 @@
 package util;
 
+import java.util.Iterator;
+
 public interface Cell<T> {
 	
 	public void setTop(T top);
 	
+	public T getTop();
+	
 	public void setBottom(T bottom);
+	
+	public T getBottom();
 	
 	public void setRight(T right);
 	
-	public void setLeft(T left);
-
-	public float getTemp();
+	public T getRight();
 	
-	public void setTemp(float temp);
+	public void setLeft(T left);
+	
+	public T getLeft();
 
+	public double getTemp();
+	
+	public void setTemp(double temp);
+	
+	public float calculateTemp();
+	
+	public void swapTemp();
+	
+	public Iterator<T> getChildren(boolean unvisited);
+	
 }

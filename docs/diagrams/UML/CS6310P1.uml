@@ -68,7 +68,12 @@
         </ownedEnd>
       </packagedElement>
       <packagedElement xmi:type="uml:Signal" xmi:id="_KrbPQDoXEeSiTZQ2STYS9A" name="TpdohpRunner"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_oWfPUDoqEeSiTZQ2STYS9A" name="Demo"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_oWfPUDoqEeSiTZQ2STYS9A" name="Demo">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_lAij0DxyEeSUr5U9i687QQ" name="main" isStatic="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_p-mZQDxyEeSUr5U9i687QQ" name="args" type="_tmkeUDopEeSiTZQ2STYS9A"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_sJu0EDxyEeSUr5U9i687QQ" name="" type="_hY7cwDopEeSiTZQ2STYS9A" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_YCYAIDlEEeShobHKpIUTgA" name="LatticePoint">
         <generalization xmi:type="uml:Generalization" xmi:id="_HgrHUDoTEeSiTZQ2STYS9A" general="_SSMKMDlEEeShobHKpIUTgA"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_oO6H0DoCEeShobHKpIUTgA" name="left" visibility="public" type="_SSMKMDlEEeShobHKpIUTgA" isUnique="false">
@@ -101,6 +106,7 @@
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_MhW7gDoqEeSiTZQ2STYS9A" name="" type="_hY7cwDopEeSiTZQ2STYS9A" direction="return"/>
         </ownedOperation>
       </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_tuKbQDxyEeSUr5U9i687QQ" name="TpdohpHandler"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_abJY4DlFEeShobHKpIUTgA" name="gallhp">
       <packagedElement xmi:type="uml:Class" xmi:id="_nnal4DlFEeShobHKpIUTgA" name="GallhpView"/>

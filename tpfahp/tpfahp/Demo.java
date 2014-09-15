@@ -2,9 +2,7 @@ package tpfahp;
 
 import java.util.Hashtable;
 
-import twfahp.Twfahp;
 import lib.ISimulation;
-import lib.SimulationRunner;
 
 public class Demo {
 	
@@ -14,7 +12,7 @@ public class Demo {
 		Demo.configureOpts();
 		Demo.parseArgs(args);
 		
-		ISimulation simulation = new Tpfahp(new ResultsHandler());
+		ISimulation simulation = new Tpfahp(new TpfahpHandler());
 		
 		int width = Integer.parseInt(options.get("-d"));
 		int height = Integer.parseInt(options.get("-d"));

@@ -14,7 +14,7 @@ public final class Tpdohp extends Simulation {
 	
 	private LatticePoint root = null;
 	
-	private float leftTemp = 0, rightTemp = 0, topTemp = 0, bottomTemp = 0;
+	private double leftTemp = 0, rightTemp = 0, topTemp = 0, bottomTemp = 0;
 	
 	private int height = 0, width = 0;
 	
@@ -46,22 +46,23 @@ public final class Tpdohp extends Simulation {
 		this.height = height + 2;
 		this.width = width + 2;
 		
-		this.leftTemp = leftTemp;
-		this.rightTemp = rightTemp;
-		this.topTemp = topTemp;
-		this.bottomTemp = bottomTemp;
+		this.leftTemp 	= (double) leftTemp;
+		this.rightTemp 	= (double) rightTemp;
+		this.topTemp 	= (double) topTemp;
+		this.bottomTemp = (double) bottomTemp;
 	}
 
 	@Override
 	public void initializePlate() {
 		
 		LatticePoint latticeRoot = new LatticePoint(0, true);
+		LatticePoint curr = latticeRoot, left = null, top = null;
+		LatticePoint anchor = curr;
 		
-		float temp = 0;
+		double temp = 0;
 		boolean edge = true;
-		LatticePoint curr = latticeRoot, left = null, top = null, anchor = null;
-		anchor = curr;
 		String debug = "";
+		
 		for (int h = 0; h < this.height; h++) {
 			for (int w = 0; w < this.width; w++) {
 				
@@ -87,6 +88,8 @@ public final class Tpdohp extends Simulation {
 			anchor = anchor.bottom;
 			System.out.println();
 		}
+		
+		this.root = latticeRoot.getBottom().getRight();
 	}
 	
 	@Override
@@ -148,25 +151,25 @@ public final class Tpdohp extends Simulation {
 		}
 	}
 	
-	private class LatticePoint implements Cell<LatticePoint> {
+	private final class LatticePoint implements Cell<LatticePoint> {
 		
-		private static final float AVG = 4.0f;
+		public static final double AVG = 4.0;
 		
-		public LatticePoint top = null;
-		public LatticePoint bottom = null;
-		public LatticePoint left = null;
-		public LatticePoint right = null;
-		public boolean visited, isEdge;
-		public float currTemp, newTemp;
+		private LatticePoint top = null;
+		private LatticePoint bottom = null;
+		private LatticePoint left = null;
+		private LatticePoint right = null;
+		private boolean visited, isEdge;
+		private double currTemp, newTemp;
 		
-		public LatticePoint(float temp, boolean isEdge) {
+		public LatticePoint(double temp, boolean isEdge) {
 			
 			this.setTemp(temp);
 			this.visited = false;
 			this.isEdge = isEdge;
 		}
 		
-		public LatticePoint(LatticePoint top, LatticePoint bottom, LatticePoint left, LatticePoint right, float temp, boolean isEdge) {
+		public LatticePoint(LatticePoint top, LatticePoint bottom, LatticePoint left, LatticePoint right, double temp, boolean isEdge) {
 			
 			this(temp, isEdge);
 			
@@ -186,12 +189,22 @@ public final class Tpdohp extends Simulation {
 		}
 		
 		@Override
+		public LatticePoint getTop() {
+			return this.top;
+		}
+		
+		@Override
 		public void setBottom(LatticePoint bottom) {
 			
 			if (bottom == null) return;
 			
 			this.bottom = bottom;
 			bottom.top = this;
+		}
+		
+		@Override
+		public LatticePoint getBottom() {
+			return this.bottom;
 		}
 		
 		@Override
@@ -204,6 +217,11 @@ public final class Tpdohp extends Simulation {
 		}
 		
 		@Override
+		public LatticePoint getRight() {
+			return this.right;
+		}
+		
+		@Override
 		public void setLeft(LatticePoint left) {
 			
 			if (left == null) return;
@@ -213,15 +231,32 @@ public final class Tpdohp extends Simulation {
 		}
 		
 		@Override
-		public float getTemp() {
-			return new Float(this.currTemp);
+		public LatticePoint getLeft() {
+			return this.left;
 		}
 		
 		@Override
-		public void setTemp(float temp) {
+		public double getTemp() {
+			return new Double(this.currTemp);
+		}
+		
+		@Override
+		public void setTemp(double temp) {
 			this.currTemp = temp;
 		}
 		
+		@Override
+		public float calculateTemp() {
+			this.newTemp = (this.top.currTemp + this.bottom.currTemp + this.right.currTemp + this.left.currTemp) / AVG;
+			return (float)this.newTemp - (float)this.currTemp;
+		}
+		
+		@Override
+		public void swapTemp() {
+			this.currTemp = this.newTemp;
+		}
+		
+		@Override
 		public Iterator<LatticePoint> getChildren(boolean unvisited) {
 			List<LatticePoint> ret = new ArrayList<LatticePoint>();
 			
@@ -231,15 +266,6 @@ public final class Tpdohp extends Simulation {
 			if (!this.right.isEdge 	&& this.right.visited == unvisited) 	ret.add(this.right);
 			
 			return ret.iterator();
-		}
-		
-		public float calculateTemp() {
-			this.newTemp = (this.top.currTemp + this.bottom.currTemp + this.right.currTemp + this.left.currTemp) / AVG;
-			return this.newTemp - this.currTemp;
-		}
-		
-		public void swapTemp() {
-			this.currTemp = this.newTemp;
 		}
 	}
 }
