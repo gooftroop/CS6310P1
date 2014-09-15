@@ -16,14 +16,14 @@ public abstract class Simulation implements ISimulation {
 		
 		this.rh = rh;
 	}
+	
+	protected void update(float temp, int x, int y) {
+		rh.display(temp, x, y);
+	}	
 
 	public abstract void setup(int height, int width, float leftTemp, float rightTemp, float topTemp, float bottomTemp);
 	
 	public abstract void run();
 	
 	protected abstract void initializePlate();
-	
-	private void update(float temp, int x, int y) {
-		rh.display(temp, x, y);
-	}	
 }
