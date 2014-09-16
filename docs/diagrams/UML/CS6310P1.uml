@@ -101,7 +101,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KnzL4T0qEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KnzL4j0qEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_7qiBsD0xEeSUr5U9i687QQ" name="" type="_sJQl0D0pEeSUr5U9i687QQ" association="_7qiowD0xEeSUr5U9i687QQ">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_7qiBsD0xEeSUr5U9i687QQ" name="" type="_sJQl0D0pEeSUr5U9i687QQ" aggregation="shared" association="_7qiowD0xEeSUr5U9i687QQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7qiBsT0xEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7qiBsj0xEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
@@ -301,20 +301,18 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7xPEwjlOEeShobHKpIUTgA" value="*"/>
         </ownedEnd>
       </packagedElement>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_L2j70DlKEeShobHKpIUTgA" name="java.swing">
       <packagedElement xmi:type="uml:Class" xmi:id="_L2j70TlKEeShobHKpIUTgA" name="JFrame" isAbstract="true">
         <generalization xmi:type="uml:Generalization" xmi:id="_FH3ZwDlLEeShobHKpIUTgA" general="_nnal4DlFEeShobHKpIUTgA"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_4i7DoD1JEeSHtIwajJzggw" name="layout" type="_L2j70zlKEeShobHKpIUTgA" aggregation="composite" association="_4i8RwD1JEeSHtIwajJzggw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4i7DoT1JEeSHtIwajJzggw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4i7Doj1JEeSHtIwajJzggw" value="1"/>
+        </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_L2j70zlKEeShobHKpIUTgA" name="GridBagLayout"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_gD_-IDlNEeShobHKpIUTgA" name="contains" memberEnd="_gD_-ITlNEeShobHKpIUTgA _gD_XEDlNEeShobHKpIUTgA" navigableOwnedEnd="_gD_XEDlNEeShobHKpIUTgA">
-        <ownedEnd xmi:type="uml:Property" xmi:id="_gD_-ITlNEeShobHKpIUTgA" name="" type="_L2j70TlKEeShobHKpIUTgA" association="_gD_-IDlNEeShobHKpIUTgA">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gD_-IjlNEeShobHKpIUTgA" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gD_-IzlNEeShobHKpIUTgA" value="1"/>
-        </ownedEnd>
-        <ownedEnd xmi:type="uml:Property" xmi:id="_gD_XEDlNEeShobHKpIUTgA" name="layout" type="_L2j70zlKEeShobHKpIUTgA" aggregation="composite" association="_gD_-IDlNEeShobHKpIUTgA">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gD_XETlNEeShobHKpIUTgA" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gD_XEjlNEeShobHKpIUTgA" value="1"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_4i8RwD1JEeSHtIwajJzggw" name="&lt;&lt;instantiates>>" memberEnd="_4i8RwT1JEeSHtIwajJzggw _4i7DoD1JEeSHtIwajJzggw">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_4i8RwT1JEeSHtIwajJzggw" name="" type="_L2j70TlKEeShobHKpIUTgA" association="_4i8RwD1JEeSHtIwajJzggw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4i8Rwj1JEeSHtIwajJzggw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4i8Rwz1JEeSHtIwajJzggw" value="1"/>
         </ownedEnd>
       </packagedElement>
     </packagedElement>
@@ -637,7 +635,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sX3wLT0xEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sX3wLj0xEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_XKNp8D0yEeSUr5U9i687QQ" name="" type="_sJQl0D0pEeSUr5U9i687QQ" association="_XKNp8z0yEeSUr5U9i687QQ">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_XKNp8D0yEeSUr5U9i687QQ" name="" type="_sJQl0D0pEeSUr5U9i687QQ" aggregation="shared" association="_XKNp8z0yEeSUr5U9i687QQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XKNp8T0yEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XKNp8j0yEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
@@ -793,7 +791,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SPTZtD0zEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SPTZtT0zEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_SPTZtj0zEeSUr5U9i687QQ" name="" type="_SPSLrz0zEeSUr5U9i687QQ" association="_SPTZwD0zEeSUr5U9i687QQ">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_SPTZtj0zEeSUr5U9i687QQ" name="" type="_SPSLrz0zEeSUr5U9i687QQ" aggregation="shared" association="_SPTZwD0zEeSUr5U9i687QQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SPTZtz0zEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SPTZuD0zEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
@@ -822,7 +820,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fcGLJD0zEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fcGLJT0zEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_fcGLJj0zEeSUr5U9i687QQ" name="" type="_fcGyTz0zEeSUr5U9i687QQ" association="_fcGLMD0zEeSUr5U9i687QQ">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_fcGLJj0zEeSUr5U9i687QQ" name="" type="_fcGyTz0zEeSUr5U9i687QQ" aggregation="shared" association="_fcGLMD0zEeSUr5U9i687QQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fcGLJz0zEeSUr5U9i687QQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fcGLKD0zEeSUr5U9i687QQ" value="1"/>
         </ownedAttribute>
