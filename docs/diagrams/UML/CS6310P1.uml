@@ -165,7 +165,7 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PxLlAjlPEeShobHKpIUTgA" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_ZqT7YzlREeShobHKpIUTgA" name="creates" memberEnd="_ZqT7ZDlREeShobHKpIUTgA _ZqT7YDlREeShobHKpIUTgA" navigableOwnedEnd="_ZqT7YDlREeShobHKpIUTgA">
+      <packagedElement xmi:type="uml:Association" xmi:id="_ZqT7YzlREeShobHKpIUTgA" name="&lt;&lt;creates>>" memberEnd="_ZqT7ZDlREeShobHKpIUTgA _ZqT7YDlREeShobHKpIUTgA" navigableOwnedEnd="_ZqT7YDlREeShobHKpIUTgA">
         <ownedEnd xmi:type="uml:Property" xmi:id="_ZqT7ZDlREeShobHKpIUTgA" name="" type="_-tyrkDlFEeShobHKpIUTgA" association="_ZqT7YzlREeShobHKpIUTgA">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZqT7ZTlREeShobHKpIUTgA" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZqT7ZjlREeShobHKpIUTgA" value="1"/>
@@ -188,13 +188,10 @@
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wuflgTlNEeShobHKpIUTgA" value="1"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wuflgjlNEeShobHKpIUTgA" value="1"/>
           </ownedAttribute>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Interface" xmi:id="_OUqdUDlHEeShobHKpIUTgA" name="ISimulationFactory">
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_K5IxUDqqEeSBOJ8bKzfKxg" name="getInstance" visibility="private"/>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_lDNKIDqtEeSBOJ8bKzfKxg" name="getSimulation">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_rNKK8DqtEeSBOJ8bKzfKxg" name="type" type="_xc7dADlGEeShobHKpIUTgA"/>
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_3pbeYDqtEeSBOJ8bKzfKxg" name="" type="_k85yCTqmEeSBOJ8bKzfKxg" direction="return"/>
-          </ownedOperation>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_ZHaAUD07EeSUr5U9i687QQ" name="rh" type="_d-umgD05EeSUr5U9i687QQ" aggregation="shared" association="_ZHanYD07EeSUr5U9i687QQ">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZHaAUT07EeSUr5U9i687QQ" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZHaAUj07EeSUr5U9i687QQ" value="1"/>
+          </ownedAttribute>
         </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_4y1w8z0zEeSUr5U9i687QQ" name="&lt;&lt;creates>>" memberEnd="_4y1w9D0zEeSUr5U9i687QQ _4y1w8D0zEeSUr5U9i687QQ _Ba3WsD00EeSUr5U9i687QQ _CONfMD00EeSUr5U9i687QQ _C4YdkD00EeSUr5U9i687QQ" navigableOwnedEnd="_4y1w8D0zEeSUr5U9i687QQ _CONfMD00EeSUr5U9i687QQ _C4YdkD00EeSUr5U9i687QQ _Ba3WsD00EeSUr5U9i687QQ">
           <ownedEnd xmi:type="uml:Property" xmi:id="_4y1w9D0zEeSUr5U9i687QQ" name="" type="_zzlyYDlGEeShobHKpIUTgA" association="_4y1w8z0zEeSUr5U9i687QQ">
@@ -226,6 +223,22 @@
           <ownedEnd xmi:type="uml:Property" xmi:id="_443D8D00EeSUr5U9i687QQ" name="" type="_xc7dADlGEeShobHKpIUTgA" association="_443D8z00EeSUr5U9i687QQ">
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_443D8T00EeSUr5U9i687QQ" value="1"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_443D8j00EeSUr5U9i687QQ" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_OUqdUDlHEeShobHKpIUTgA" name="ISimulationFactory">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_K5IxUDqqEeSBOJ8bKzfKxg" name="getInstance" visibility="private"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_lDNKIDqtEeSBOJ8bKzfKxg" name="getSimulation">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_rNKK8DqtEeSBOJ8bKzfKxg" name="type" type="_xc7dADlGEeShobHKpIUTgA"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_3pbeYDqtEeSBOJ8bKzfKxg" name="" type="_k85yCTqmEeSBOJ8bKzfKxg" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_d-umgD05EeSUr5U9i687QQ" name="GallhpHandler">
+          <generalization xmi:type="uml:Generalization" xmi:id="_q4JeED07EeSUr5U9i687QQ" general="_tsdd8D0pEeSUr5U9i687QQ"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_ZHanYD07EeSUr5U9i687QQ" name="" memberEnd="_ZHanYT07EeSUr5U9i687QQ _ZHaAUD07EeSUr5U9i687QQ">
+          <ownedEnd xmi:type="uml:Property" xmi:id="_ZHanYT07EeSUr5U9i687QQ" name="" type="_nnal4DlFEeShobHKpIUTgA" association="_ZHanYD07EeSUr5U9i687QQ">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZHanYj07EeSUr5U9i687QQ" value="1"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZHanYz07EeSUr5U9i687QQ" value="1"/>
           </ownedEnd>
         </packagedElement>
       </packagedElement>
