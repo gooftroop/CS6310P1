@@ -24,7 +24,7 @@ public interface Cell<T> {
 	
 	public void setTemp(double temp);
 	
-	public double calculateTemp();
+	public float calculateTemp();
 	
 	public void swapTemp();
 	

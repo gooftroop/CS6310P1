@@ -57,8 +57,6 @@ public final class Tpfahp extends Simulation {
 	@Override
 	public void run() {
 		
-		float maxDeviation = 0.0f;
-		
 		do {
 			
 			maxDeviation = 0.0f;
@@ -80,7 +78,11 @@ public final class Tpfahp extends Simulation {
 			// overwrite oldMatrix with newMatrix
 			swapMatrixes();
 			
-		} while (maxDeviation >= 0.01 && numIterations++ <= MAX_ITERATIONS);
+		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
+		
+		rh.stop();
+		rh.setNumIterations(currIterations);
+		rh.report();
 	}
 	
 	private void initializeMatrix(float matrix[][]) {

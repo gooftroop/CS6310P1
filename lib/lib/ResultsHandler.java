@@ -5,8 +5,6 @@ public abstract class ResultsHandler implements IResultsHandler {
 	
 	public static final int NEWLINE_LENGTH = 1;
 	
-	protected ISimulation sim;
-	
 	// Number of total iterations made
 	private int numIterations = 0;
 	
@@ -17,6 +15,7 @@ public abstract class ResultsHandler implements IResultsHandler {
 		this.start();
 	}
 	
+	@Override
 	public void stop() {
 		this.endTime = System.nanoTime();
 	}

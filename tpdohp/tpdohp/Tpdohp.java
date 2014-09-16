@@ -1,14 +1,11 @@
 package tpdohp;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import lib.IResultsHandler;
 import lib.Simulation;
-import util.Cell;
 import util.LatticePoint;
 
 public final class Tpdohp extends Simulation {
@@ -114,13 +111,11 @@ public final class Tpdohp extends Simulation {
 		
 		Queue<LatticePoint> bfs = new LinkedList<LatticePoint>();
 		
-		int currIterations = 0;
-		double maxDeviation = 0;
-		double deviation = 0;
+		float deviation = 0f;
 		
 		do {
 			
-			maxDeviation = 0;
+			maxDeviation = deviation = 0f;
 			
 			bfs.add(this.root);
 			this.root.visited(true);
@@ -144,7 +139,6 @@ public final class Tpdohp extends Simulation {
 			}
 
 			clearNodes();
-			rh.setNumIterations(currIterations);
 		
 		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
 		

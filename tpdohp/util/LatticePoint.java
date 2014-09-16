@@ -100,9 +100,9 @@ public final class LatticePoint implements Cell<LatticePoint> {
 	}
 	
 	@Override
-	public double calculateTemp() {
+	public float calculateTemp() {
 		this.newTemp = (this.top.getTemp() + this.bottom.getTemp() + this.right.getTemp() + this.left.getTemp()) / AVG;
-		return this.newTemp - this.currTemp;
+		return (float) this.newTemp - (float) this.currTemp;
 	}
 	
 	@Override
