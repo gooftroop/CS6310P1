@@ -110,6 +110,7 @@ public final class Tpdohp extends Simulation {
 	public void run() {
 		
 		Queue<LatticePoint> bfs = new LinkedList<LatticePoint>();
+		Queue<LatticePoint> visited = new LinkedList<LatticePoint>();
 		
 		float deviation = 0f;
 		

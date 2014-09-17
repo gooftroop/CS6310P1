@@ -1,9 +1,13 @@
 package lib;
 
+import java.util.Arrays;
+
 public class DemoHandler extends ResultsHandler {
+
+	private String[][] resultMatrix;
 	
-	private String resultMatrix;
-	private final int width;
+	private final int WIDTH;
+	private final int HEIGHT;
 	
 	public DemoHandler(int width, int height) {
 		super();
@@ -11,17 +15,18 @@ public class DemoHandler extends ResultsHandler {
 		if (width < 0 || width > Integer.MAX_VALUE) throw new IllegalArgumentException("Invalid width");
 		if (height < 0 || height > Integer.MAX_VALUE) throw new IllegalArgumentException("Invalid height");
 		
-		String populateRow = new String(new char[width]).replace("\0", "000.00 ").concat("\n");
-		resultMatrix = new String(new char[height]).replace("\0", populateRow);
+		this.HEIGHT = height;
+		this.WIDTH = width;
+	
+		resultMatrix = new String[WIDTH][HEIGHT];
 		
-		this.width = width;
+		for (String[] row: resultMatrix)
+		    Arrays.fill(row, "000.00");
 	}
 
 	@Override
 	public void display(double temp, int x, int y) {
-		
-		int index = (y * (width * 7 + NEWLINE_LENGTH)) + (x * 7);
-		resultMatrix = resultMatrix.substring(0, index) + String.format("%06.2f ", temp) + resultMatrix.substring((index + 7 ));
+		resultMatrix[x][y] = String.format("%06.2f ", temp);
 	}
 
 	@Override
@@ -35,6 +40,12 @@ public class DemoHandler extends ResultsHandler {
 		System.out.format("Time taken to complete: %f seconds\n", total);
 		System.out.println();
 		
-		System.out.println(resultMatrix);
+		for (int y = 0; y < HEIGHT; y++) {
+			for (int x = 0; x < WIDTH; x++) {
+				System.out.print(resultMatrix[x][y]);
+				System.out.print("\t");
+			}
+			System.out.println();
+		}
 	}
 }

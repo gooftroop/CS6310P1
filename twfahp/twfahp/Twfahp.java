@@ -58,34 +58,29 @@ public final class Twfahp extends Simulation {
 	@Override
 	public void run() {
 		
-		int top = 0;
-		float newTemp = 0;
+		Float newTemp = new Float(0);
 		double deviation = 0;
 		Float hold[] = new Float[this.width];
 		Arrays.fill(hold, this.topTemp);
 		
 		do {
 			
-			maxDeviation = 0.0f;
+			Arrays.fill(hold, this.topTemp);
+			maxDeviation = 0.0d;
 			
 			// iterate through newMatrix, filling in values from oldMatrix, recoding maxDeviation;
-			for ( int i = 1 ; i < this.width - 1 ; i ++ ) {
+			for ( int y = 1 ; y < this.height - 1 ; y ++ ) {
+				for ( int x = 1; x < this.width - 1 ; x++ ) {
 				
-				top = i - 1;
-				
-				// inside - if hold is valid, apply to -1 and replace with new
-				
-				for ( int j = 1; j < this.height - 1 ; j++ ) {
-				
-					newTemp = ((plate[i-1][j] + plate[i+1][j] + plate[i][j-1] + plate[i][j+1]) / 4.0f);
+					newTemp = new Float(((plate[x - 1][y] + plate[x + 1][y] + plate[x][y - 1] + plate[x][y + 1]) / 4.0f));
 					
-					if ((deviation = newTemp - plate[i][j]) > maxDeviation )
+					if ((deviation = newTemp - plate[x][y]) > maxDeviation )
 						maxDeviation = deviation;
 					
-					plate[top][j] = hold[j];
-					hold[j] = newTemp; 
+					plate[x][y - 1] = hold[x - 1];
+					hold[x - 1] = newTemp; 
 					
-					this.update(newTemp, (i - 1), (j - 1));
+					this.update(newTemp, (x - 1), (y - 1));
 				}
 			}
 			
@@ -98,20 +93,20 @@ public final class Twfahp extends Simulation {
 	
 	private void initializeMatrix(Float matrix[][]) {
 		
-		for (int i = 0; i < this.width; i++) {
-			for ( int j = 0; j < this.height; j++) {
+		for (int y = 0; y < this.height; y++) {
+			for ( int x = 0; x < this.width; x++) {
 				
 				// the corners of the matrix are are not used in the simulation, and so do not need special cases
-				if (i == 0)
-					matrix[i][j] = this.topTemp; 	// top row
-				else if (i == (this.width - 1))
-					matrix[i][j] = this.bottomTemp; // bottom row
-				else if ( j == 0 )
-					matrix[i][j] = this.leftTemp; 	// left column 
-				else if (j == (this.height - 1))
-					matrix[i][j] = this.rightTemp; 	// right column 
+				if (y == 0)
+					matrix[x][y] = this.topTemp; 	// top row
+				else if (y == (this.height - 1))
+					matrix[x][y] = this.bottomTemp; // bottom row
+				else if ( x == 0 )
+					matrix[x][y] = this.leftTemp; 	// left column 
+				else if (x == (this.width - 1))
+					matrix[x][y] = this.rightTemp; 	// right column 
 				else
-					matrix[i][j] = 0.0f; 			// not an edge, the plate itself
+					matrix[x][y] = new Float(0.0); 			// not an edge, the plate itself
 			}
 		}
 	}
