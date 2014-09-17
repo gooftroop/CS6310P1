@@ -1622,6 +1622,10 @@
               <element xmi:type="uml:Operation" href="CS6310P1.uml#_jOle8D0rEeSUr5U9i687QQ"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_jOmtET0rEeSUr5U9i687QQ"/>
             </children>
+            <children xmi:type="notation:Shape" xmi:id="_-GH3UD4WEeSUE5IqAY4u9w" type="3007">
+              <element xmi:type="uml:Operation" href="CS6310P1.uml#_-CLygD4WEeSUE5IqAY4u9w"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_-GH3UT4WEeSUE5IqAY4u9w"/>
+            </children>
             <styles xmi:type="notation:TitleStyle" xmi:id="_vulGtz0pEeSUr5U9i687QQ"/>
             <styles xmi:type="notation:SortingStyle" xmi:id="_vulGuD0pEeSUr5U9i687QQ"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_vulGuT0pEeSUr5U9i687QQ"/>
@@ -1699,7 +1703,7 @@
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_T2Q_MT0tEeSUr5U9i687QQ"/>
       <element xmi:type="uml:Association" href="CS6310P1.uml#_T2Oi8D0tEeSUr5U9i687QQ"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_T2Q_Mj0tEeSUr5U9i687QQ" points="[0, -1, -189, -13]$[189, -1, 0, -13]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_T2Q_Mj0tEeSUr5U9i687QQ" points="[0, 1, -189, -20]$[189, 1, 0, -20]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_T2eakD0tEeSUr5U9i687QQ" id="(1.0,0.37037037037037035)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_T2eakT0tEeSUr5U9i687QQ" id="(0.0,0.6027397260273972)"/>
     </edges>

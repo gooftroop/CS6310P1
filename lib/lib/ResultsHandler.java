@@ -59,20 +59,19 @@ public abstract class ResultsHandler implements IResultsHandler {
 	}
 	
 	@Override
+	public long getUsedMemory () {
+		return this.maximumMemoryUsed;
+	}
+	
+	@Override
 	public abstract void display(float temp, int x, int y);
 	
 	@Override
 	public abstract void report();
 	
-	public void calcUsedMemory( ) {
+	private void calcUsedMemory() {
 		
-		if ( ( this.runTime.totalMemory() - this.runTime.freeMemory() ) > this.maximumMemoryUsed ) {
+		if ((this.runTime.totalMemory() - this.runTime.freeMemory()) > this.maximumMemoryUsed)
 			this.maximumMemoryUsed = this.runTime.totalMemory() - this.runTime.freeMemory();
-		}		
-	}
-	
-	@Override
-	public long getUsedMemory ( ) {
-		return this.maximumMemoryUsed;
 	}
 }

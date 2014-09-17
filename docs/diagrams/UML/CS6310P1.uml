@@ -488,6 +488,11 @@
           </ownedParameter>
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_It8cYD0sEeSUr5U9i687QQ" name="" type="_hY7cwDopEeSiTZQ2STYS9A" direction="return"/>
         </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_-CLygD4WEeSUE5IqAY4u9w" name="getUsedMemory">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_IGwOwD4XEeSUE5IqAY4u9w" name="" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+          </ownedParameter>
+        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_T2Oi8D0tEeSUr5U9i687QQ" name="" visibility="protected" memberEnd="_T2Oi9D0tEeSUr5U9i687QQ _T2Oi8T0tEeSUr5U9i687QQ" navigableOwnedEnd="_T2Oi8T0tEeSUr5U9i687QQ">
         <ownedEnd xmi:type="uml:Property" xmi:id="_T2Oi8T0tEeSUr5U9i687QQ" name="# rh" type="_vuiqcD0pEeSUr5U9i687QQ" association="_T2Oi8D0tEeSUr5U9i687QQ">
