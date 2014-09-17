@@ -29,6 +29,7 @@ public class DemoHandler extends ResultsHandler {
 		
 		System.out.println("Simulation Complete.");
 		System.out.println("Total number of iterations made: " + this.getNumIterations());
+		System.out.println("Maximum runtime memory used: " + this.getUsedMemory() + " bytes");
 		
 		double total = ((double)(this.getEndTime() - this.getStartTime())) / 1000000000;
 		System.out.format("Time taken to complete: %f seconds\n", total);

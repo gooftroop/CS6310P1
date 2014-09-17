@@ -75,7 +75,7 @@ public final class Twfahp extends Simulation {
 						maxDeviation = newMatrix[i][j] - oldMatrix[i][j];
 					}
 					
-					this.update(newMatrix[i][j], i, j);
+					this.update(newMatrix[i][j], (i-1), (j-1));
 				}
 			}
 
