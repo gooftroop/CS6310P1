@@ -1,12 +1,13 @@
 package tpdahp;
 
+import java.util.Arrays;
+
 import lib.IResultsHandler;
 import lib.Simulation;
 
 public final class Tpdahp extends Simulation {
 	
-	private double oldMatrix[][];
-	private double newMatrix[][];
+	private double plate[][];
 	
 	private double leftTemp, rightTemp, topTemp, bottomTemp;
 	
@@ -15,7 +16,7 @@ public final class Tpdahp extends Simulation {
 	}
 	
 	@Override
-	public void setup(int height, int width, float leftTemp, float rightTemp, float topTemp, float bottomTemp) {
+	public void setup(int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
 		
 		if (height < 0 || height >= Integer.MAX_VALUE)
 			throw new IllegalArgumentException("Invalid height dimension");
@@ -38,10 +39,10 @@ public final class Tpdahp extends Simulation {
 		this.height = height + 2;
 		this.width = width + 2;
 		
-		this.leftTemp 	= (double) leftTemp;
-		this.rightTemp 	= (double) rightTemp;
-		this.topTemp 	= (double) topTemp;
-		this.bottomTemp = (double) bottomTemp;
+		this.leftTemp 	= leftTemp;
+		this.rightTemp 	= rightTemp;
+		this.topTemp 	= topTemp;
+		this.bottomTemp = bottomTemp;
 		
 		this.initializePlate();
 	}
@@ -49,15 +50,19 @@ public final class Tpdahp extends Simulation {
 	@Override
 	protected void initializePlate() {
 		
-		oldMatrix = new double[this.width][this.height];
-		newMatrix = new double[this.width][this.height];
+		plate = new double[this.width][this.height];
 		
-		initializeMatrix(oldMatrix);
-		initializeMatrix(newMatrix);
+		initializeMatrix(plate);
 	}
 	
 	@Override
 	public void run() {
+		
+		int top = 0;
+		double newTemp = 0;
+		double deviation = 0;
+		double hold[] = new double[this.width];
+		Arrays.fill(hold, this.topTemp);
 		
 		do {
 			
@@ -65,20 +70,24 @@ public final class Tpdahp extends Simulation {
 			
 			// iterate through newMatrix, filling in values from oldMatrix, recoding maxDeviation;
 			for ( int i = 1 ; i < this.width - 1 ; i ++ ) {
+				
+				top = i - 1;
+				
+				// inside - if hold is valid, apply to -1 and replace with new
+				
 				for ( int j = 1; j < this.height - 1 ; j++ ) {
 				
-					newMatrix[i][j] = ( ( oldMatrix[i-1][j] + oldMatrix[i+1][j] + oldMatrix[i][j-1] + oldMatrix[i][j+1] ) / 4.0f );
+					newTemp = ((plate[i-1][j] + plate[i+1][j] + plate[i][j-1] + plate[i][j+1]) / 4.0f);
 					
-					if ( newMatrix[i][j] - oldMatrix[i][j] > maxDeviation ) {
-						maxDeviation = (float) (newMatrix[i][j] - oldMatrix[i][j]);
-					}
+					if ((deviation = newTemp - plate[i][j]) > maxDeviation )
+						maxDeviation = deviation;
 					
-					this.update((float) newMatrix[i][j], (i-1), (j-1));
+					plate[top][j] = hold[j];
+					hold[j] = newTemp; 
+					
+					this.update(newTemp, (i - 1), (j - 1));
 				}
 			}
-
-			// overwrite oldMatrix with newMatrix
-			swapMatrixes();
 			
 		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
 		
@@ -103,15 +112,6 @@ public final class Tpdahp extends Simulation {
 					matrix[i][j] = this.rightTemp; 	// right column 
 				else
 					matrix[i][j] = 0.0f; 			// not an edge, the plate itself
-			}
-		}
-	}
-	
-	private void swapMatrixes() {
-		
-		for ( int i = 1 ; i < this.width - 1 ; i++ ) {
-			for ( int j = 1 ; j < this.height - 1 ; j++ ) {
-				oldMatrix[i][j] = newMatrix[i][j];
 			}
 		}
 	}

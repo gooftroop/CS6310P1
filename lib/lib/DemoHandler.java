@@ -18,7 +18,7 @@ public class DemoHandler extends ResultsHandler {
 	}
 
 	@Override
-	public void display(float temp, int x, int y) {
+	public void display(double temp, int x, int y) {
 		
 		int index = (y * (width * 7 + NEWLINE_LENGTH)) + (x * 7);
 		resultMatrix = resultMatrix.substring(0, index) + String.format("%06.2f ", temp) + resultMatrix.substring((index + 7 ));

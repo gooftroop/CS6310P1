@@ -21,7 +21,7 @@ public final class Tpdohp extends Simulation {
 	}
 	
 	@Override
-	public void setup(int height, int width, float leftTemp, float rightTemp, float topTemp, float bottomTemp) {
+	public void setup(int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
 		
 		if (height < 0 || height >= Integer.MAX_VALUE)
 			throw new IllegalArgumentException("Invalid height dimension");
@@ -44,10 +44,10 @@ public final class Tpdohp extends Simulation {
 		this.height = height + 2;
 		this.width = width + 2;
 		
-		this.leftTemp 	= (double) leftTemp;
-		this.rightTemp 	= (double) rightTemp;
-		this.topTemp 	= (double) topTemp;
-		this.bottomTemp = (double) bottomTemp;
+		this.leftTemp 	= leftTemp;
+		this.rightTemp 	= rightTemp;
+		this.topTemp 	= topTemp;
+		this.bottomTemp = bottomTemp;
 		
 		this.initializePlate();
 	}
@@ -135,7 +135,7 @@ public final class Tpdohp extends Simulation {
 					bfs.add(child);
 				}
 				
-				this.update((float)point.getTemp(), point.x, point.y);
+				this.update(point.getTemp(), point.x, point.y);
 			}
 
 			clearNodes();

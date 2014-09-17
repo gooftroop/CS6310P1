@@ -13,12 +13,13 @@ public class Demo {
 		Demo.configureOpts();
 		Demo.parseArgs(args);
 		
-		int width = Integer.parseInt(options.get("-d"));
-		int height = Integer.parseInt(options.get("-d"));
-		float left = Float.parseFloat(options.get("-l"));
-		float right = Float.parseFloat(options.get("-r"));
-		float top = Float.parseFloat(options.get("-t"));
-		float bottom = Float.parseFloat(options.get("-b"));
+		int width 		= Integer.parseInt(options.get("-d"));
+		int height 		= Integer.parseInt(options.get("-d"));
+		
+		double left 	= Double.parseDouble(options.get("-l"));
+		double right 	= Double.parseDouble(options.get("-r"));
+		double top 		= Double.parseDouble(options.get("-t"));
+		double bottom 	= Double.parseDouble(options.get("-b"));
 		
 		ISimulation simulation = new Tpfahp(new DemoHandler(width, height));
 		simulation.setup(width, height, left, right,top, bottom);

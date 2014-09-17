@@ -63,12 +63,6 @@ public abstract class ResultsHandler implements IResultsHandler {
 		return this.maximumMemoryUsed;
 	}
 	
-	@Override
-	public abstract void display(float temp, int x, int y);
-	
-	@Override
-	public abstract void report();
-	
 	private void calcUsedMemory() {
 		
 		if ((this.runTime.totalMemory() - this.runTime.freeMemory()) > this.maximumMemoryUsed)

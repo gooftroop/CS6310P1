@@ -2,7 +2,7 @@ package lib;
 
 public interface IResultsHandler {
 	
-	public void display(float temp, int x, int y);
+	public void display(double temp, int x, int y);
 	
 	public void report();
 	
