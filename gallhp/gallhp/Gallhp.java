@@ -5,8 +5,7 @@ import tpdahp.Tpdahp;
 import twfahp.Twfahp;
 
 import java.util.HashMap;
-
-import lib.DemoHandler;
+import lib.GallhpHandler;
 import lib.ISimulation;
 
 public class Gallhp {
@@ -29,21 +28,25 @@ public class Gallhp {
 // twdahpBtn, tpfahpBtn, twfahpBtn, tpdohpBtn
 	private void chooseModel() {
 		if (model == "tpdahp") {
-			ISimulation simulation = new Tpdahp(new DemoHandler(latticeCount, latticeCount));		
+			ISimulation simulation = new Tpdahp(new GallhpHandler(latticeCount, latticeCount));		
 			simulation.setup(latticeCount, latticeCount, this.left, this.right, this.top, this.bottom);
+			simulation.run();
 		}
 		else if (model == "tpfahp"){
-			ISimulation simulation = new Tpfahp(new DemoHandler(latticeCount, latticeCount));		
+			ISimulation simulation = new Tpfahp(new GallhpHandler(latticeCount, latticeCount));		
 			simulation.setup(latticeCount, latticeCount, this.left, this.right, this.top, this.bottom);
+			simulation.run();
 		}
 		else if (model == "twfahp") {
-			ISimulation simulation = new Twfahp(new DemoHandler(latticeCount, latticeCount));		
+			ISimulation simulation = new Twfahp(new GallhpHandler(latticeCount, latticeCount));		
 			simulation.setup(latticeCount, latticeCount, this.left, this.right, this.top, this.bottom);
+			simulation.run();
 		}
 		// assume tpdohp
 		else {
-			ISimulation simulation = new Tpdohp(new DemoHandler(latticeCount, latticeCount));		
+			ISimulation simulation = new Tpdohp(new GallhpHandler(latticeCount, latticeCount));		
 			simulation.setup(latticeCount, latticeCount, this.left, this.right, this.top, this.bottom);
+			simulation.run();
 		}
 		
 	}
