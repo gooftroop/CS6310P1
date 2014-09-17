@@ -16,6 +16,8 @@ public interface IResultsHandler {
 	
 	public long getEndTime();
 	
+	public long getUsedMemory();
+	
 	public void setNumIterations(int numIterations);
 
 }

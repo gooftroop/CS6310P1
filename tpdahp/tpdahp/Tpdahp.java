@@ -73,7 +73,7 @@ public final class Tpdahp extends Simulation {
 						maxDeviation = (float) (newMatrix[i][j] - oldMatrix[i][j]);
 					}
 					
-					this.update((float) newMatrix[i][j], i, j);
+					this.update((float) newMatrix[i][j], (i-1), (j-1));
 				}
 			}
 

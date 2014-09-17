@@ -42,6 +42,8 @@ public final class Tpfahp extends Simulation {
 		this.rightTemp = rightTemp;
 		this.topTemp = topTemp;
 		this.bottomTemp = bottomTemp;
+		
+		this.initializePlate();
 	}
 	
 	@Override
@@ -71,7 +73,7 @@ public final class Tpfahp extends Simulation {
 						maxDeviation = newMatrix[i][j] - oldMatrix[i][j];
 					}
 					
-					this.update(newMatrix[i][j], i, j);
+					this.update(newMatrix[i][j], (i-1), (j-1));
 				}
 			}
 
