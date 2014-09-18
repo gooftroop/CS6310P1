@@ -1,9 +1,12 @@
 package lib;
 
+import gallhp.ResultsView;
+
 public class GallhpHandler extends ResultsHandler {
 	
 	private String resultMatrix;
 	private final int width;
+	private ResultsView listener;
 	
 	public GallhpHandler (int width, int height) {
 		super();
@@ -24,11 +27,17 @@ public class GallhpHandler extends ResultsHandler {
 		//System.out.println("Index " + index);
 		resultMatrix = resultMatrix.substring(0, index) + String.format("%06.2f ", temp) + resultMatrix.substring((index + 7 ));
 		System.out.println("## RESULT ## \n" + resultMatrix);
+		this.listener.updateResults();
 	}
 
 	@Override
 	public void report() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void addListener(ResultsView resultsView) {
+		this.listener = resultsView;
 		
 	}
 }

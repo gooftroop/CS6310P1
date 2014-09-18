@@ -21,7 +21,13 @@ public class ResultsView extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.drawRect(WIDTH, HEIGHT, 100, 100);
+	}
+
+	public void updateResults() {
+		System.out.println("Results Updated");
+		
 	}
 
 }
