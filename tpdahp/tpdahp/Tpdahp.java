@@ -11,12 +11,9 @@ public final class Tpdahp extends Simulation {
 	
 	private double leftTemp, rightTemp, topTemp, bottomTemp;
 	
-	public Tpdahp(IResultsHandler rh) {
+	public Tpdahp(IResultsHandler rh, int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
 		super(rh);
-	}
-	
-	@Override
-	public void setup(int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
+
 		
 		if (height < 0 || height >= Integer.MAX_VALUE)
 			throw new IllegalArgumentException("Invalid height dimension");

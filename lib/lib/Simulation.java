@@ -18,6 +18,7 @@ public abstract class Simulation implements ISimulation {
 		this.rh = rh;
 	}
 	
+	@Override
 	public void update(double temp, int x, int y) {
 		rh.display(temp, x, y);
 	}	

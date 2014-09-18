@@ -21,8 +21,7 @@ public class Demo {
 		double top 		= Double.parseDouble(options.get("-t"));
 		double bottom 	= Double.parseDouble(options.get("-b"));
 		
-		ISimulation simulation = new Tpdohp(new DemoHandler(width, height));		
-		simulation.setup(width, height, left, right,top, bottom);
+		ISimulation simulation = new Tpdohp(new DemoHandler(width, height), width, height, left, right,top, bottom);
 		
 		System.out.format("Starting %d x %d plate simulation...\n", width, height);
 		simulation.run();
