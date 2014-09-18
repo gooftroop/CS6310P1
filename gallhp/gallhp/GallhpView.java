@@ -1,6 +1,10 @@
 package gallhp;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -8,6 +12,8 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import lib.ISimulation;
 import lib.IView;
@@ -28,17 +34,37 @@ public class GallhpView extends JFrame implements Observer, IView {
 	
 	public GallhpView() {
 		
+        try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e1) {
+		} catch (InstantiationException e1) {
+		} catch (IllegalAccessException e1) {
+		} catch (UnsupportedLookAndFeelException e1) {
+		}
+		
 		// add our JPanel components
 		menuView = new MenuView(this);
 		resultsView = new ResultsView();
 		
 		this.setTitle("Heat Diffusion Simulation");
-		this.setLayout(new BorderLayout());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(menuView, BorderLayout.WEST);
-		this.add(resultsView, BorderLayout.EAST);
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(2, 2, 2, 2);
+		
+		this.add(menuView, gbc);
+		gbc.gridx++;
+		this.add(resultsView, gbc);
+		gbc.gridx++;
+		
+		gbc.gridx = 0;
+		gbc.gridy++;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		runBtn = new JButton("Run");
+		runBtn.setPreferredSize(new Dimension(40, 25));
 		runBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -48,7 +74,11 @@ public class GallhpView extends JFrame implements Observer, IView {
 			}
 		});
 		
+		this.add(runBtn, gbc);
+		gbc.gridx++;
+		
 		resetBtn = new JButton("Reset");
+		resetBtn.setPreferredSize(new Dimension(40, 25));
 		resetBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -58,8 +88,7 @@ public class GallhpView extends JFrame implements Observer, IView {
 			}
 		});
 		
-		this.add(runBtn, BorderLayout.SOUTH);
-		this.add(resetBtn, BorderLayout.SOUTH);
+		this.add(resetBtn, gbc);
 		
 		this.pack();
 		this.setVisible(true);

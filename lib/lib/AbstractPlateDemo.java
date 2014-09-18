@@ -18,11 +18,16 @@ public abstract class AbstractPlateDemo implements IView {
 		
 		String curr = "", currOpt = "";
 		
+		System.out.println(options);
+		System.out.println(args);
+		
 		if (args.length == 0) throw new IllegalArgumentException("No arguments provided to Demo");
 		
 		for (int i = 0; i < args.length; i++) {
 			
 			curr = args[i];
+			System.out.println(curr);
+			
 	        switch (curr.charAt(0)) {
 	        
 	        	case '-':

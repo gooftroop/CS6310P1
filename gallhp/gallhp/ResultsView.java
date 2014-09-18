@@ -19,12 +19,13 @@ public class ResultsView extends JPanel {
 		
 		TitledBorder resultTitle;
 		resultTitle = BorderFactory.createTitledBorder("Simulation Results");
-		this.setLayout(new GridLayout(0, 0, HGAP, VGAP));
 		this.setBorder(resultTitle);
 		this.setPreferredSize(new Dimension(500,500));
 	}
 	
 	public void initGrid(int width, int height) {
+		
+		this.setLayout(new GridLayout(height, width, HGAP, VGAP));
 		
 		JLabel label = null;
 		for (int i = 0; i < (width * height); i ++) {

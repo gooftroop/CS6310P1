@@ -77,7 +77,7 @@ public class MenuView extends JPanel {
 		
 		latticeCount = new JTextField();
 		latticeCount.setColumns(4);
-		JLabel latticeCountLabel = new JLabel("Lattice Count");
+		JLabel latticeCountLabel = new JLabel("Dimensions");
 		this.add(latticeCountLabel);
 		this.add(latticeCount);
 		

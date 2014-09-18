@@ -2,8 +2,6 @@ package lib;
 
 public abstract class ResultsHandler implements IResultsHandler {
 	
-	public static final int NEWLINE_LENGTH = 1;
-	
 	protected ISimulation sim;
 	
 	// Number of total iterations made
