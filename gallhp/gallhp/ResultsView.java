@@ -1,6 +1,8 @@
 package gallhp;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -15,6 +17,11 @@ public class ResultsView extends JPanel {
 		resultTitle = BorderFactory.createTitledBorder("Simulation Results");
 		this.setBorder(resultTitle);
 		this.setLayout(new FlowLayout());
+		this.setPreferredSize(new Dimension(500,500));
+	}
+	
+	public void paintComponent(Graphics g) {
+		g.drawRect(WIDTH, HEIGHT, 100, 100);
 	}
 
 }
