@@ -20,9 +20,14 @@ public class MenuView extends JPanel implements ActionListener {
 	private ButtonGroup group;
 	private JTextField topEdge, rightEdge, bottomEdge, leftEdge, latticeCount;
 	private JButton runBtn, resetBtn;
+	protected String model;
+	protected int lattices;
+	protected float top, left, right, bottom;
+	private GallhpView frame;
 	
 	
-	public MenuView() {
+	public MenuView(GallhpView frame) {
+		this.frame = frame;
 		TitledBorder modelTitle;
 		modelTitle = BorderFactory.createTitledBorder("Simulation Options");
 		this.setBorder(modelTitle);
@@ -116,17 +121,14 @@ public class MenuView extends JPanel implements ActionListener {
 	
 	public void runSim() {
 		System.out.println("Running simulation....");
-		HashMap<String, Float> params = new HashMap<String, Float>();
-		params.put("top", Float.parseFloat(topEdge.getText()));
-		params.put("right", Float.parseFloat(rightEdge.getText()));
-		params.put("bottom", Float.parseFloat(bottomEdge.getText()));
-		params.put("left", Float.parseFloat(leftEdge.getText()));
 		
-		int lattices = Integer.parseInt(latticeCount.getText());
-		
-		String model = group.getSelection().toString();
-		
-		Gallhp gallhp = new Gallhp(params, lattices, model);
+		this.top = Float.parseFloat(topEdge.getText());
+		this.right = Float.parseFloat(rightEdge.getText());
+		this.bottom = Float.parseFloat(bottomEdge.getText());
+		this.left = Float.parseFloat(leftEdge.getText());
+		lattices = Integer.parseInt(latticeCount.getText());
+		model = group.getSelection().toString();
+		frame.chooseModel();
 	}
 
 }
