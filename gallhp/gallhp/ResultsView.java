@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class ResultsView extends JPanel {
+public class ResultsView extends JPanel implements ResultsListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,8 +25,8 @@ public class ResultsView extends JPanel {
 		g.drawRect(WIDTH, HEIGHT, 100, 100);
 	}
 
-	public void updateResults() {
-		System.out.println("Results Updated");
+	public void updateResults(String results) {
+		System.out.println("Results Updated\n" + results);
 		
 	}
 

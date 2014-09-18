@@ -1,20 +1,16 @@
 package gallhp;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 
 import lib.GallhpHandler;
-import lib.ISimulation;
 import lib.Simulation;
 import tpdahp.Tpdahp;
 import tpdohp.Tpdohp;
 import tpfahp.Tpfahp;
 import twfahp.Twfahp;
 
-public class GallhpView extends JFrame implements ActionListener {
+public class GallhpView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private MenuView menuView;
@@ -56,12 +52,6 @@ public class GallhpView extends JFrame implements ActionListener {
 		simulation.setup(menuView.lattices, menuView.lattices, menuView.left, menuView.right, menuView.top, menuView.bottom);
 		simulation.run();
 		
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,12 +1,14 @@
 package lib;
 
-import gallhp.ResultsView;
+import java.util.ArrayList;
+import java.util.List;
+import gallhp.ResultsListener;
 
 public class GallhpHandler extends ResultsHandler {
 	
 	private String resultMatrix;
 	private final int width;
-	private ResultsView listener;
+	private List<ResultsListener> listeners = new ArrayList<ResultsListener>();
 	
 	public GallhpHandler (int width, int height) {
 		super();
@@ -24,10 +26,10 @@ public class GallhpHandler extends ResultsHandler {
 	public void display(float temp, int x, int y) {
 		
 		int index = (y * (width * 7 + NEWLINE_LENGTH)) + (x * 7);
-		//System.out.println("Index " + index);
 		resultMatrix = resultMatrix.substring(0, index) + String.format("%06.2f ", temp) + resultMatrix.substring((index + 7 ));
-		System.out.println("## RESULT ## \n" + resultMatrix);
-		this.listener.updateResults();
+		for (ResultsListener l : listeners) {
+			l.updateResults(resultMatrix);
+		}
 	}
 
 	@Override
@@ -36,8 +38,8 @@ public class GallhpHandler extends ResultsHandler {
 		
 	}
 
-	public void addListener(ResultsView resultsView) {
-		this.listener = resultsView;
+	public void addListener(ResultsListener resultsView) {
+		this.listeners.add(resultsView);
 		
 	}
 }
