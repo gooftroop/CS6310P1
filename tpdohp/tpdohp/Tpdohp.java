@@ -16,8 +16,19 @@ public final class Tpdohp extends Simulation {
 	
 	private int height = 0, width = 0;
 	
-	public Tpdohp(IResultsHandler rh, int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
+	public Tpdohp() {
+		/* Empty */
+	}
+	
+	public Tpdohp(IResultsHandler rh, int height, int width, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
 		super(rh);
+		
+		this.setup(height, width, topTemp, bottomTemp, leftTemp, rightTemp);
+		this.initializePlate();
+	}
+	
+	@Override
+	public void setup(int width, int height, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
 		
 		if (height < 0 || height >= Integer.MAX_VALUE)
 			throw new IllegalArgumentException("Invalid height dimension");
@@ -44,8 +55,6 @@ public final class Tpdohp extends Simulation {
 		this.rightTemp 	= rightTemp;
 		this.topTemp 	= topTemp;
 		this.bottomTemp = bottomTemp;
-		
-		this.initializePlate();
 	}
 
 	@Override

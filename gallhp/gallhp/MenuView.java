@@ -1,42 +1,41 @@
 package gallhp;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class MenuView extends JPanel implements ActionListener {
+import util.SimulationSelection;
+
+public class MenuView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
 	private JRadioButton twdahpBtn, tpfahpBtn, twfahpBtn, tpdohpBtn;
 	private ButtonGroup group;
 	private JTextField topEdge, rightEdge, bottomEdge, leftEdge, latticeCount;
-	private JButton runBtn, resetBtn;
+	
 	protected String model;
 	protected int lattices;
 	protected float top, left, right, bottom;
-	private GallhpView frame;
 	
 	
 	public MenuView(GallhpView frame) {
-		this.frame = frame;
+		
 		TitledBorder modelTitle;
 		modelTitle = BorderFactory.createTitledBorder("Simulation Options");
 		this.setBorder(modelTitle);
 		this.setLayout(new FlowLayout());
 		
-		twdahpBtn = new JRadioButton("twdahp");
-		tpfahpBtn = new JRadioButton("tpfahp");
-		twfahpBtn = new JRadioButton("twfahp");
-		tpdohpBtn = new JRadioButton("tpdohp");
+		twdahpBtn = new JRadioButton("Twdahp");
+		tpfahpBtn = new JRadioButton("Tpfahp");
+		twfahpBtn = new JRadioButton("Twfahp");
+		tpdohpBtn = new JRadioButton("Tpdohp");
 		
 		tpfahpBtn.setSelected(true);
 		
@@ -82,35 +81,10 @@ public class MenuView extends JPanel implements ActionListener {
 		this.add(latticeCountLabel);
 		this.add(latticeCount);
 		
-		runBtn = new JButton("Run");
-		runBtn.addActionListener(this);
-		
-		resetBtn = new JButton("Reset");
-		resetBtn.addActionListener(this);
-		
-		this.add(runBtn);
-		this.add(resetBtn);
 	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == runBtn) {
-			System.out.println("Run Button pressed");
-			this.runSim();
-		}
-		else if (e.getSource() == resetBtn) {
-			System.out.println("Reset Button pressed");
-			this.reset();
-		}
-		else {
-			// let's assume some ghost is interfering here
-		}
-	}
-
 
 	public void reset() {
+		
 		latticeCount.setText(null);
 		topEdge.setText(null);
 		rightEdge.setText(null);
@@ -118,17 +92,32 @@ public class MenuView extends JPanel implements ActionListener {
 		leftEdge.setText(null);
 		tpfahpBtn.setSelected(true);
 	}
-	
-	public void runSim() {
-		System.out.println("Running simulation....");
-		
-		this.top = Float.parseFloat(topEdge.getText());
-		this.right = Float.parseFloat(rightEdge.getText());
-		this.bottom = Float.parseFloat(bottomEdge.getText());
-		this.left = Float.parseFloat(leftEdge.getText());
-		lattices = Integer.parseInt(latticeCount.getText());
-		model = group.getSelection().toString();
-		frame.chooseModel();
+
+	public String getTopEdgeText() {
+		return this.topEdge.getText();
 	}
 
+	public String getBottomEdgeText() {
+		return this.bottomEdge.getText();
+	}
+	
+	public String getLeftEdgeText() {
+		return this.leftEdge.getText();
+	}
+	
+	public String getRightEdgeText() {
+		return this.rightEdge.getText();
+	}
+	
+	public String getPlateWidth() {
+		return this.latticeCount.getText();
+	}
+	
+	public String getPlateHeight() {
+		return this.latticeCount.getText();
+	}
+	
+	public SimulationSelection getSelectedSimulation() {
+		return SimulationSelection.valueOf(this.group.getSelection().toString().toUpperCase());
+	}
 }

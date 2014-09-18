@@ -1,33 +1,12 @@
-package tpdahp;
+package lib;
 
 import java.util.Hashtable;
 
-import lib.DemoHandler;
-import lib.ISimulation;
-
-public class Demo {
+public abstract class AbstractPlateDemo implements IView {
 	
-	private static final Hashtable<String, String> options = new Hashtable<String, String>();
+	protected static final Hashtable<String, String> options = new Hashtable<String, String>();
 	
-	public static void main(String...args) {
-		Demo.configureOpts();
-		Demo.parseArgs(args);
-		
-		int width 		= Integer.parseInt(options.get("-d"));
-		int height 		= Integer.parseInt(options.get("-d"));
-		
-		double left 	= Double.parseDouble(options.get("-l"));
-		double right 	= Double.parseDouble(options.get("-r"));
-		double top 		= Double.parseDouble(options.get("-t"));
-		double bottom 	= Double.parseDouble(options.get("-b"));
-		
-		ISimulation simulation = new Tpdahp(new DemoHandler(width, height), width, height, left, right,top, bottom);
-		
-		System.out.format("Starting %d x %d plate simulation...\n", width, height);
-		simulation.run();
-	}
-
-	private static void configureOpts() {
+	protected static void configureOpts() {
 		options.put("-d", "");
 		options.put("-l", "");
 		options.put("-r", "");
@@ -35,7 +14,7 @@ public class Demo {
 		options.put("-b", "");
 	}
 	
-	private static void parseArgs(String... args) {
+	protected static void parseArgs(String... args) {
 		
 		String curr = "", currOpt = "";
 		

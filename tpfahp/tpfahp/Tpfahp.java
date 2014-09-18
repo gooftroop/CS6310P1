@@ -1,7 +1,5 @@
 package tpfahp;
 
-import java.util.Arrays;
-
 import lib.IResultsHandler;
 import lib.Simulation;
 
@@ -12,9 +10,20 @@ public final class Tpfahp extends Simulation {
 	
 	private float leftTemp, rightTemp, topTemp, bottomTemp;
 	
-	public Tpfahp(IResultsHandler rh, int height, int width, double leftTemp, double rightTemp, double topTemp, double bottomTemp) {
+	public Tpfahp() {
+		/* Empty */
+	}
+	
+	public Tpfahp(IResultsHandler rh, int height, int width, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
 		super(rh);
 		
+		this.setup(height, width, topTemp, bottomTemp, leftTemp, rightTemp);
+		this.initializePlate();
+	}
+	
+	@Override
+	public void setup(int width, int height, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
+	
 		if (height < 0 || height >= Integer.MAX_VALUE)
 			throw new IllegalArgumentException("Invalid height dimension");
 		
