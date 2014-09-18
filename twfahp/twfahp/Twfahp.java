@@ -7,7 +7,8 @@ import lib.Simulation;
 
 public final class Twfahp extends Simulation {
 	
-	private Float plate[][];
+	private Float oldMatrix[][];
+	private Float newMatrix[][];
 	
 	private Float leftTemp, rightTemp, topTemp, bottomTemp;
 	
@@ -46,41 +47,38 @@ public final class Twfahp extends Simulation {
 	@Override
 	protected void initializePlate() {
 		
-		plate = new Float[this.width][this.height];
+		oldMatrix = new Float[this.width][this.height];
+		newMatrix = new Float[this.width][this.height];
 		
-		initializeMatrix(plate);
+		initializeMatrix(oldMatrix);
+		initializeMatrix(newMatrix);
 	}
 	
 	@Override
 	public void run() {
 		
-		Float newTemp = new Float(0);
 		double deviation = 0;
-		Float hold[] = new Float[this.width];
-		Arrays.fill(hold, this.topTemp);
 		
 		do {
 			
-			Arrays.fill(hold, this.topTemp);
 			maxDeviation = 0.0d;
 			
 			// iterate through newMatrix, filling in values from oldMatrix, recoding maxDeviation;
 			for ( int y = 1 ; y < this.height - 1 ; y ++ ) {
 				for ( int x = 1; x < this.width - 1 ; x++ ) {
 				
-					newTemp = new Float(((plate[x - 1][y] + plate[x + 1][y] + plate[x][y - 1] + plate[x][y + 1]) / 4.0f));
+					newMatrix[x][y] = new Float(((oldMatrix[x - 1][y] + oldMatrix[x + 1][y] + oldMatrix[x][y - 1] + oldMatrix[x][y + 1]) / 4.0f));
 					
-					if ((deviation = newTemp - plate[x][y]) > maxDeviation )
+					if ((deviation = (newMatrix[x][y] - oldMatrix[x][y])) > maxDeviation )
 						maxDeviation = deviation;
 					
-					plate[x][y - 1] = hold[x - 1];
-					hold[x - 1] = newTemp; 
-					
-					this.update(newTemp, (x - 1), (y - 1));
+					this.update(newMatrix[x][y], (x - 1), (y - 1));
 				}
 			}
 			
-		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
+			swapMatrix(oldMatrix, newMatrix);
+			
+		} while (maxDeviation >= MAX_DEVIATION && currIterations++ <= MAX_ITERATIONS);
 		
 		rh.stop();
 		rh.setNumIterations(currIterations);
@@ -103,6 +101,15 @@ public final class Twfahp extends Simulation {
 					matrix[x][y] = this.rightTemp; 	// right column 
 				else
 					matrix[x][y] = new Float(0.0); 			// not an edge, the plate itself
+			}
+		}
+	}
+	
+	private void swapMatrix(Float[][] dest, Float[][] src) {
+		
+		for (int y = 0; y < this.height; y++) {
+			for (int x = 0; x < this.width; x++) {
+				dest[x][y] = src[x][y];
 			}
 		}
 	}

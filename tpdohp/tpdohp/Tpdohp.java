@@ -106,7 +106,6 @@ public final class Tpdohp extends Simulation {
 	public void run() {
 		
 		Queue<LatticePoint> bfs = new LinkedList<LatticePoint>();
-		Queue<LatticePoint> visited = new LinkedList<LatticePoint>();
 		
 		float deviation = 0f;
 		
@@ -137,7 +136,7 @@ public final class Tpdohp extends Simulation {
 
 			clearNodes();
 		
-		} while (maxDeviation >= 0.01 && currIterations++ <= MAX_ITERATIONS);
+		} while (maxDeviation >= MAX_DEVIATION && currIterations++ <= MAX_ITERATIONS);
 		
 		rh.stop();
 		rh.setNumIterations(currIterations);
