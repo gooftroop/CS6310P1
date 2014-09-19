@@ -91,7 +91,7 @@ public class MenuView extends JPanel {
 		group = new ButtonGroup();
 		group.add(tpfahpBtn);
 		group.add(tpdahpBtn);
-		group.add(tpdahpBtn);
+		group.add(twfahpBtn);
 		group.add(tpdohpBtn);
 		
 		options.add(tpfahpBtn, ogbc);
