@@ -12,10 +12,6 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import com.alee.laf.WebLookAndFeel;
 
 import lib.ISimulation;
 import lib.IView;
@@ -23,6 +19,8 @@ import lib.UpdatePacket;
 import util.GallhpHandler;
 import util.SimulationFactory;
 import util.SimulationSelection;
+
+import com.alee.laf.WebLookAndFeel;
 
 public class GallhpView extends JFrame implements Observer, IView {
 
@@ -38,14 +36,6 @@ public class GallhpView extends JFrame implements Observer, IView {
 	private Thread runner = null;
 	
 	public GallhpView() {
-		
-//        try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//		} catch (ClassNotFoundException e1) {
-//		} catch (InstantiationException e1) {
-//		} catch (IllegalAccessException e1) {
-//		} catch (UnsupportedLookAndFeelException e1) {
-//		}
 		
 		WebLookAndFeel.install();
 		
