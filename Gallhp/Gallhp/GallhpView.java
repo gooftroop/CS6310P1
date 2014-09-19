@@ -1,7 +1,6 @@
 package Gallhp;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -26,11 +25,13 @@ public class GallhpView extends JFrame implements Observer, IView {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JButton runBtn, resetBtn;
+	private JButton runBtn, resetBtn, stopBtn;
 	private MenuView menuView;
 	private ResultsView resultsView;
 	private GallhpHandler resultHandler;
 	private ISimulation simulation;
+	
+	private Thread runner = null;
 	
 	public GallhpView() {
 		
@@ -75,6 +76,19 @@ public class GallhpView extends JFrame implements Observer, IView {
 		});
 		
 		this.add(runBtn, gbc);
+		gbc.gridy++;
+		
+		stopBtn = new JButton("Stop");
+		stopBtn.setPreferredSize(new Dimension(40, 25));
+		stopBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopSim();
+			}
+		});
+		
+		this.add(stopBtn, gbc);
 		gbc.gridy++;
 		
 		resetBtn = new JButton("Reset");
@@ -122,13 +136,30 @@ public class GallhpView extends JFrame implements Observer, IView {
 			simulation.injectHandler(resultHandler);
 			simulation.setup(width, height, top, bottom, left, right);
 			
-			EventQueue.invokeLater(new Runnable() {
-	            @Override
-	            public void run() {
-	            	simulation.run();
-	            }
+			runner = new Thread(new Runnable() {
+			    public void run() {
+			    	simulation.run();
+			    }
 			});
+			
+			runner.start();
 		}
+	}
+	
+	public void stopSim() {
+		
+		if (runner != null && runner.isAlive()) {
+			runner.interrupt();
+			try {
+				runner.join();
+			} catch (InterruptedException e) {
+				// Do nothing
+			}
+			
+			runner = null;
+		}
+		
+		resultsView.reset();
 	}
 
 	@Override

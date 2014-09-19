@@ -2,6 +2,7 @@ package Gallhp;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -77,10 +78,10 @@ public class ResultsView extends JPanel {
 		this.repaint();
 	}
 
-	public void updateResults(double temp, int x, int y) {
-
+	public void updateResults(final double temp, final int x, final int y) {
+		
 		JPanel cell = results[x][y];
-		cell.setBackground(this.getColor(temp));
+		cell.setBackground(getColor(temp));
 	}
 	
 	private Color getColor(double temp) {
