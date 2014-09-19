@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import com.alee.laf.WebLookAndFeel;
+
 import lib.ISimulation;
 import lib.IView;
 import lib.UpdatePacket;
@@ -37,13 +39,15 @@ public class GallhpView extends JFrame implements Observer, IView {
 	
 	public GallhpView() {
 		
-        try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e1) {
-		} catch (InstantiationException e1) {
-		} catch (IllegalAccessException e1) {
-		} catch (UnsupportedLookAndFeelException e1) {
-		}
+//        try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (ClassNotFoundException e1) {
+//		} catch (InstantiationException e1) {
+//		} catch (IllegalAccessException e1) {
+//		} catch (UnsupportedLookAndFeelException e1) {
+//		}
+		
+		WebLookAndFeel.install();
 		
 		// add our JPanel components
 		menuView = new MenuView(this);

@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="Tpdahp"/>
 	<classpathentry kind="src" path="Twfahp"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="resource/weblaf-complete-1.28.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
