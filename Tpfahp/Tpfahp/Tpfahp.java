@@ -1,12 +1,13 @@
 package Tpfahp;
 
+import java.util.Arrays;
+
 import lib.IResultsHandler;
 import lib.Simulation;
 
 public final class Tpfahp extends Simulation {
 
-	private float oldMatrix[][];
-	private float newMatrix[][];
+	private float plate[][];
 	
 	private float leftTemp, rightTemp, topTemp, bottomTemp;
 	
@@ -56,11 +57,10 @@ public final class Tpfahp extends Simulation {
 	@Override
 	protected void initializePlate() {
 		
-		oldMatrix = new float[this.width][this.height];
-		newMatrix = new float[this.width][this.height];
+		plate = new float[this.width][this.height];
+
 		
-		this.initializeMatrix(oldMatrix);
-		this.initializeMatrix(newMatrix);
+		this.initializeMatrix(plate);
 	}
 	
 	@Override
@@ -68,24 +68,36 @@ public final class Tpfahp extends Simulation {
 		
 		double deviation = 0;
 		
+		float newTemp = 0;
+		float hold[] = new float[this.width - 2];
+		
 		do {
 			
 			maxDeviation = 0.0d;
+			
+			Arrays.fill(hold, this.topTemp);
 			
 			// iterate through newMatrix, filling in values from oldMatrix, recoding maxDeviation;
 			for ( int y = 1 ; y < this.height - 1 ; y ++ ) {
 				for ( int x = 1; x < this.width - 1 ; x++ ) {
 				
-					newMatrix[x][y] = ((oldMatrix[x - 1][y] + oldMatrix[x + 1][y] + oldMatrix[x][y - 1] + oldMatrix[x][y + 1]) / 4.0f);
+					newTemp = ((plate[x - 1][y] + plate[x + 1][y] + plate[x][y - 1] + plate[x][y + 1]) / 4.0f);
 					
-					if ((deviation = (newMatrix[x][y] - oldMatrix[x][y])) > maxDeviation )
+					if ((deviation = (newTemp - plate[x][y])) > maxDeviation )
 						maxDeviation = deviation;
 					
-					this.update(newMatrix[x][y], (x - 1), (y - 1));
+					this.update(newTemp, (x - 1), (y - 1));
+					
+					if (y == this.height - 2) {
+						plate[x][y] = newTemp;
+						plate[x][y - 1] = hold[x - 1];
+						hold[x -1] = this.topTemp;
+					} else {
+						plate[x][y - 1] = hold[x - 1];
+						hold[x - 1] = newTemp;
+					}
 				}
 			}
-			
-			swapMatrix(oldMatrix, newMatrix);
 			
 		} while (maxDeviation >= MAX_DEVIATION && currIterations++ <= MAX_ITERATIONS);
 		
@@ -110,15 +122,6 @@ public final class Tpfahp extends Simulation {
 					matrix[x][y] = this.rightTemp; 	// right column 
 				else
 					matrix[x][y] = new Float(0.0); 			// not an edge, the plate itself
-			}
-		}
-	}
-	
-	private void swapMatrix(float[][] dest, float[][] src) {
-		
-		for (int y = 0; y < this.height; y++) {
-			for (int x = 0; x < this.width; x++) {
-				dest[x][y] = src[x][y];
 			}
 		}
 	}
