@@ -24,7 +24,6 @@ public final class Tpdohp extends Simulation {
 		super(rh);
 		
 		this.setup(height, width, topTemp, bottomTemp, leftTemp, rightTemp);
-		this.initializePlate();
 	}
 	
 	@Override
@@ -55,6 +54,8 @@ public final class Tpdohp extends Simulation {
 		this.rightTemp 	= rightTemp;
 		this.topTemp 	= topTemp;
 		this.bottomTemp = bottomTemp;
+		
+		this.initializePlate();
 	}
 
 	@Override

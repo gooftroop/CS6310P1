@@ -133,12 +133,17 @@ public class GallhpView extends JFrame implements Observer, IView {
 		if (selection != null) {
 
 			simulation = SimulationFactory.getInstance().produceSimulation(selection);
+
 			simulation.injectHandler(resultHandler);
 			simulation.setup(width, height, top, bottom, left, right);
 			
 			runner = new Thread(new Runnable() {
 			    public void run() {
-			    	simulation.run();
+			    	try { 
+			    		simulation.run();
+			    	} catch(Exception e) {
+			    		e.printStackTrace();
+			    	}
 			    }
 			});
 			
