@@ -1,20 +1,20 @@
-package twfahp;
+package Tpdahp;
 
 import lib.IResultsHandler;
 import lib.Simulation;
 
-public final class Twfahp extends Simulation {
+public final class Tpdahp extends Simulation {
 	
-	private Float oldMatrix[][];
-	private Float newMatrix[][];
+	private double newMatrix[][];
+	private double oldMatrix[][];
 	
-	private Float leftTemp, rightTemp, topTemp, bottomTemp;
+	private double leftTemp, rightTemp, topTemp, bottomTemp;
 	
-	public Twfahp() {
+	public Tpdahp() {
 		/* Empty */
 	}
 	
-	public Twfahp(IResultsHandler rh, int height, int width, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
+	public Tpdahp(IResultsHandler rh, int height, int width, double topTemp, double bottomTemp, double leftTemp, double rightTemp) {
 		super(rh);
 		
 		this.setup(height, width, topTemp, bottomTemp, leftTemp, rightTemp);
@@ -45,10 +45,10 @@ public final class Twfahp extends Simulation {
 		this.height = height + 2;
 		this.width = width + 2;
 		
-		this.leftTemp 	= new Float(leftTemp);
-		this.rightTemp 	= new Float(rightTemp);
-		this.topTemp 	= new Float(topTemp);
-		this.bottomTemp = new Float(bottomTemp);
+		this.leftTemp 	= leftTemp;
+		this.rightTemp 	= rightTemp;
+		this.topTemp 	= topTemp;
+		this.bottomTemp = bottomTemp;
 		
 		this.initializePlate();
 	}
@@ -56,11 +56,11 @@ public final class Twfahp extends Simulation {
 	@Override
 	protected void initializePlate() {
 		
-		oldMatrix = new Float[this.width][this.height];
-		newMatrix = new Float[this.width][this.height];
+		newMatrix = new double[this.width][this.height];
+		oldMatrix = new double[this.width][this.height];
 		
-		initializeMatrix(oldMatrix);
 		initializeMatrix(newMatrix);
+		initializeMatrix(oldMatrix);
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ public final class Twfahp extends Simulation {
 			for ( int y = 1 ; y < this.height - 1 ; y ++ ) {
 				for ( int x = 1; x < this.width - 1 ; x++ ) {
 				
-					newMatrix[x][y] = new Float(((oldMatrix[x - 1][y] + oldMatrix[x + 1][y] + oldMatrix[x][y - 1] + oldMatrix[x][y + 1]) / 4.0f));
+					newMatrix[x][y] = ((oldMatrix[x - 1][y] + oldMatrix[x + 1][y] + oldMatrix[x][y - 1] + oldMatrix[x][y + 1]) / 4.0d);
 					
 					if ((deviation = (newMatrix[x][y] - oldMatrix[x][y])) > maxDeviation )
 						maxDeviation = deviation;
@@ -94,7 +94,7 @@ public final class Twfahp extends Simulation {
 		rh.report();
 	}
 	
-	private void initializeMatrix(Float matrix[][]) {
+	private void initializeMatrix(double matrix[][]) {
 		
 		for (int y = 0; y < this.height; y++) {
 			for ( int x = 0; x < this.width; x++) {
@@ -109,12 +109,12 @@ public final class Twfahp extends Simulation {
 				else if (x == (this.width - 1))
 					matrix[x][y] = this.rightTemp; 	// right column 
 				else
-					matrix[x][y] = new Float(0.0); 			// not an edge, the plate itself
+					matrix[x][y] = 0.0d; 			// not an edge, the plate itself
 			}
 		}
 	}
 	
-	private void swapMatrix(Float[][] dest, Float[][] src) {
+	private void swapMatrix(double[][] dest, double[][] src) {
 		
 		for (int y = 0; y < this.height; y++) {
 			for (int x = 0; x < this.width; x++) {

@@ -1,4 +1,4 @@
-package tpdohp;
+package Tpdohp;
 
 import lib.AbstractPlateDemo;
 import lib.DemoHandler;

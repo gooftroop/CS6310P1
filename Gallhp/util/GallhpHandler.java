@@ -13,7 +13,6 @@ public class GallhpHandler extends Observable implements IResultsHandler {
 
 	@Override
 	public void display(double temp, int x, int y) {
-		
 		setChanged();
 		notifyObservers(new UpdatePacket(temp, x ,y));
 	}

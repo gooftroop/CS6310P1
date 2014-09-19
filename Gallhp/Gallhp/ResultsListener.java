@@ -1,4 +1,4 @@
-package gallhp;
+package Gallhp;
 
 public interface ResultsListener {
 

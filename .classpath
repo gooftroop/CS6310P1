@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="tpdohp"/>
+	<classpathentry kind="src" path="Tpdohp"/>
 	<classpathentry kind="src" path="lib"/>
-	<classpathentry kind="src" path="gallhp"/>
-	<classpathentry kind="src" path="tpfahp"/>
-	<classpathentry kind="src" path="tpdahp"/>
-	<classpathentry kind="src" path="twfahp"/>
+	<classpathentry kind="src" path="Gallhp"/>
+	<classpathentry kind="src" path="Tpfahp"/>
+	<classpathentry kind="src" path="Tpdahp"/>
+	<classpathentry kind="src" path="Twfahp"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,7 +3,7 @@ package lib;
 public abstract class Simulation implements ISimulation {
 	
 	public static final int MAX_ITERATIONS = 10000;
-	public static final double MAX_DEVIATION = 0.0001;
+	public static final double MAX_DEVIATION = 0.01;
 	public static final double MAX_TEMP = 100.0;
 	public static final double MIN_TEMP = 0.0;
 	

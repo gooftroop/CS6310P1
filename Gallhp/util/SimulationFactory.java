@@ -1,9 +1,9 @@
 package util;
 
-import tpdahp.Tpdahp;
-import tpdohp.Tpdohp;
+import Tpdahp.Tpdahp;
+import Tpdohp.Tpdohp;
+import Twfahp.Twfahp;
 import tpfahp.Tpfahp;
-import twfahp.Twfahp;
 import lib.ISimulation;
 
 public final class SimulationFactory implements ISimulationFactory {

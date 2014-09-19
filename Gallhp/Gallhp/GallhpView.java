@@ -1,7 +1,7 @@
-package gallhp;
+package Gallhp;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -69,13 +69,13 @@ public class GallhpView extends JFrame implements Observer, IView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Run Button pressed");
+				resultsView.reset();
 				runSim();
 			}
 		});
 		
 		this.add(runBtn, gbc);
-		gbc.gridx++;
+		gbc.gridy++;
 		
 		resetBtn = new JButton("Reset");
 		resetBtn.setPreferredSize(new Dimension(40, 25));
@@ -83,20 +83,19 @@ public class GallhpView extends JFrame implements Observer, IView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Reset Button pressed");
 				menuView.reset();
+				resultsView.reset();
 			}
 		});
 		
 		this.add(resetBtn, gbc);
 		
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
 	public void runSim() {
-		
-		System.out.println("Running simulation....");
 		
 		double top = Double.parseDouble(menuView.getTopEdgeText());
 		double bottom = Double.parseDouble(menuView.getBottomEdgeText());
@@ -106,14 +105,30 @@ public class GallhpView extends JFrame implements Observer, IView {
 		int width = Integer.parseInt(menuView.getPlateWidth());
 		int height = Integer.parseInt(menuView.getPlateHeight());
 		
+		// Display error message
+		if (width <= 0 || width > Integer.MAX_VALUE) return;
+		if (height <= 0 || height > Integer.MAX_VALUE) return;
+		
+		resultsView.initGrid(width, height);
+		
 		resultHandler = new GallhpHandler();
 		resultHandler.addObserver(this);
 		
 		SimulationSelection selection = menuView.getSelectedSimulation();
-		simulation = SimulationFactory.getInstance().produceSimulation(selection);
-		simulation.injectHandler(resultHandler);
-		simulation.setup(width, height, top, bottom, left, right);
-		simulation.run();
+		
+		if (selection != null) {
+
+			simulation = SimulationFactory.getInstance().produceSimulation(selection);
+			simulation.injectHandler(resultHandler);
+			simulation.setup(width, height, top, bottom, left, right);
+			
+			EventQueue.invokeLater(new Runnable() {
+	            @Override
+	            public void run() {
+	            	simulation.run();
+	            }
+			});
+		}
 	}
 
 	@Override
@@ -121,7 +136,7 @@ public class GallhpView extends JFrame implements Observer, IView {
 		
 		if (!(arg1 instanceof UpdatePacket)) 
 			return;
-		
+
 		UpdatePacket packet = (UpdatePacket) arg1;
 		resultsView.updateResults(packet.temp, packet.x, packet.y);
 	}

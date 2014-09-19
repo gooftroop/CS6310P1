@@ -1,4 +1,4 @@
-package twfahp;
+package Twfahp;
 
 import lib.AbstractPlateDemo;
 import lib.DemoHandler;
