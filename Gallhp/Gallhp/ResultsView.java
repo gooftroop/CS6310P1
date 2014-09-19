@@ -84,6 +84,41 @@ public class ResultsView extends JPanel {
 		cell.setBackground(getColor(temp));
 	}
 	
+	public JPanel getColorScale() {
+		JPanel colorScale = new JPanel();
+		colorScale.setLayout(new GridLayout(1, 8));
+		colorScale.add(new JLabel("Degrees: 0"));
+		
+		JPanel color = new JPanel();
+		color.setBackground(Color.BLUE);
+		color.setPreferredSize(new Dimension(10, 10));
+		colorScale.add(color);
+		
+		color = new JPanel();
+		color.setBackground(Color.CYAN);
+		color.setPreferredSize(new Dimension(10, 10));
+		colorScale.add(color);
+		
+		color = new JPanel();
+		color.setBackground(Color.YELLOW);
+		color.setPreferredSize(new Dimension(10, 10));
+		colorScale.add(color);
+		
+		color = new JPanel();
+		color.setBackground(Color.ORANGE);
+		color.setPreferredSize(new Dimension(10, 10));
+		colorScale.add(color);
+		
+		color = new JPanel();
+		color.setBackground(Color.RED);
+		color.setPreferredSize(new Dimension(10, 10));
+		colorScale.add(color);
+		
+		colorScale.add(new JLabel(" 100"));
+		
+		return colorScale;
+	}
+	
 	private Color getColor(double temp) {
 		
 		if (temp < 10) return Color.BLUE;

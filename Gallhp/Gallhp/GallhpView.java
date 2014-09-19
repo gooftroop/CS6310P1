@@ -11,6 +11,7 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,6 +31,7 @@ public class GallhpView extends JFrame implements Observer, IView {
 	private ResultsView resultsView;
 	private GallhpHandler resultHandler;
 	private ISimulation simulation;
+	private JPanel colorScale;
 	
 	private Thread runner = null;
 	
@@ -103,6 +105,11 @@ public class GallhpView extends JFrame implements Observer, IView {
 		});
 		
 		this.add(resetBtn, gbc);
+		
+		gbc.gridx++;
+		
+		colorScale = resultsView.getColorScale();
+		this.add(colorScale, gbc);
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
