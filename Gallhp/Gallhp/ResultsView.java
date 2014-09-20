@@ -2,8 +2,6 @@ package Gallhp;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -38,8 +36,8 @@ public class ResultsView extends JPanel {
 		results = new JPanel[width][height];
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		int cell_width = MAX_DIMENSION / width;
-		int cell_height = MAX_DIMENSION / height;
+		int cell_width = MAX_DIMENSION / width - 1;
+		int cell_height = MAX_DIMENSION / height - 1;
 		
 		
 		JPanel cell = null;

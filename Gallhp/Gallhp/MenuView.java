@@ -3,14 +3,11 @@ package Gallhp;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -28,10 +25,6 @@ public class MenuView extends JPanel {
 	private JTextField topEdge, rightEdge, bottomEdge, leftEdge, latticeCount;
 	
 	private SimulationSelection selection = null;
-	
-	protected String model;
-	protected int lattices;
-	protected float top, left, right, bottom;
 	
 	
 	public MenuView(GallhpView frame) {
